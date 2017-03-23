@@ -1,0 +1,82 @@
+@mixin phone {
+    @media only screen and (max-width: 480px){
+        @content;
+    }
+}
+
+
+
+
+%color {
+    color:green;
+    font-size: 25px;
+}
+
+.something{
+    @extend %color;
+}
+.something1{
+    @extend %color;
+}
+.something2 {
+    @extend %color;
+}
+.soc {
+    width:500px;
+    height:70px;
+}
+.social-links  {
+    list-style:none;
+    a {
+        display: block;
+        float: left;
+        width: 64px;
+        height: 64px;
+    }
+    }
+$icons:(facebook,twitter,youtube);
+
+@each $social in $icons {
+    .#{$social} {
+        background-image: url('../img/#{$social}.png');
+    }
+}
+
+@each $p in (
+    one black,
+    two black +20,
+    three black +40
+){
+    .#{nth($p, 1)} {background:#{nth($p, 2)}; }
+}
+.main {
+    max-width:91%;
+    margin:0 auto;
+}
+.test{
+    width:round(percentage(325 / 1000));
+    background-color: red;
+    float: left;
+    @include phone {
+            width:round(percentage(500 / 1000));
+            background: blue;
+    }
+}
+.test2{
+    width:round(percentage(665 / 1000));
+    float: right;
+    background-color: green;
+    @include phone {
+            width:round(percentage(500 / 1000));
+            background: red;
+        }
+    }
+// @for $i from 1 through 3 {
+//    .one-#{$i} {font-size : 10px * $i}
+//}
+$i : 1;
+@while $i < 5 {
+    .one-#{$i} {font-size : 10px * $i}
+    $i : $i + 1;
+}
+
